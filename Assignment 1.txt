@@ -1,7 +1,7 @@
 user_input = input('Please input the data as a raw string: ')
 user_input_list = user_input.split(',')
 
-valid_chars = '0123456789.-'
+valid_chars = '0123456789.'
 input_index = 0
 is_valid = True
 
@@ -23,7 +23,6 @@ for input in user_input_list:
     else:
         pass
 
-
     if is_valid and (not input == ''):
         user_input_list[input_index] = float(input)
         input_index += 1
@@ -42,26 +41,18 @@ mean_value = running_total / len(user_input_list)
 
 if is_valid:
     print(f'The mean: {mean_value}')
-    
-if is_valid:
-    number_of_instances = 0
-    modes = []
-    for element in user_input_list:
-        count = user_input_list.count(element)
-        if count > number_of_instances:
-            number_of_instances = count
-            modes = [element]
-        elif count == number_of_instances and element not in modes:
-            modes.append(element)
-    
-    if number_of_instances > 1:
-        if len(modes) == 1:
-            print(f'The mode: {modes[0]}')
-        else:
-            mode_str = ', '.join([str(mode) for mode in modes])
-            print(f'The modes: {mode_str}')
+
+# Calculating the mode
+number_of_instances = 1
+mode = 0
+for i in range(len(user_input_list)):
+    if user_input_list.count(user_input_list[i]) > number_of_instances:
+        number_of_instances = user_input_list.count(user_input_list[i])
+        mode = user_input_list[i]  
     else:
-        print('There is no mode in the given data')
+        mode = user_input_list[0]
+if is_valid:
+    print(f'The mode: {mode}') 
 
 # Calculating the standard deviation
 mean_deviations = 0
